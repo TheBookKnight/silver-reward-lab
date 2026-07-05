@@ -79,14 +79,32 @@ Build state-of-the-art shaped reward functions for complex multi-phase manipulat
 
 ---
 
-## 🚀 How to Run the Scripts (100% Offline Ready)
+## 🚀 How to Run the Scripts (100% Offline / Cruise Ready)
 
-To execute the simulations and generate visual reward charts anytime without internet:
+All physics simulations, 3D robot assets, and Python dependencies are pre-cached locally in your `.venv` directory. You can run these scripts anywhere without Wi-Fi.
+
+### Option 1: Using `uv` with Explicit Offline Mode (Recommended for Cruise)
+When working off the grid, add the `--offline` flag to guarantee `uv` will not attempt to check PyPI or remote package indices for updates:
 
 ```bash
 # Run the 2-Finger Gripper MuJoCo simulation & generate reward_comparison.png
-uv run python gripper_reward_lab.py
+uv run --offline python gripper_reward_lab.py
 
 # Run the foundational 1D grid world demo
-uv run python main.py
+uv run --offline python main.py
 ```
+
+### Option 2: Direct Virtual Environment Activation (Zero Package Manager Overhead)
+If you prefer to bypass package managers entirely while at sea, you can activate the local virtual environment directly using standard Python commands:
+
+```bash
+# Activate the pre-configured Apple Silicon virtual environment
+source .venv/bin/activate
+
+# Now run scripts directly with python (100% local, zero network checks)
+python gripper_reward_lab.py
+python main.py
+```
+
+> [!TIP]
+> **Cruise Peace of Mind:** Both methods above execute entirely on your local CPU/GPU using pre-cached MuJoCo 3.10 binaries and Fetch parallel gripper meshes. You will never need an internet connection!
